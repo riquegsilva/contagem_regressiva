@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contagem Regressiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            margin-bottom: 20px;
+        }
+
+        #contador {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Início das férias</h1>
+    <div id="contador"></div>
+
+    <script>
+        // Defina a data final (ano, mês-1, dia, hora, minuto, segundo)
+        const dataFinal = new Date(2026, 4, 16, 13, 0, 0).getTime();
+
+        const contador = document.getElementById("contador");
+
+        const intervalo = setInterval(() => {
+            const agora = new Date().getTime();
+            const diferenca = dataFinal - agora;
+
+            if (diferenca <= 0) {
+                clearInterval(intervalo);
+                contador.innerHTML = "Chegouuuuuuu!";
+                return;
+            }
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+            const segundos = Math.floor((diferenca / 1000) % 60);
+
+            contador.innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
